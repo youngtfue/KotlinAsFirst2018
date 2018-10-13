@@ -70,7 +70,7 @@ fun seconds(hours: Int = 8, minutes: Int = 20, seconds: Int = 35): Int = hours *
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
 fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
-        sagenes * 3 * 48 * 0.04445 + arshins * 48 * 0.04445 + vershoks * 0.04445
+        (sagenes * 48 + arshins * 16 + vershoks) * 0.0445
 
 
 /**
@@ -80,7 +80,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(grad: Int, min: Int, sec: Int): Double =
-        0.017 * (sec / 3600 + min / 60 + grad)
+        (sec / 3600.00 + min / 60.00 + grad) * PI / 180.00
 
 /**
  * Тривиальная
@@ -108,7 +108,7 @@ fun thirdDigit(number: Int): Int =
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
 fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int =
-        hoursArrive - hoursDepart * 60 + abs(minutesArrive - minutesDepart)
+        (hoursArrive * 60 + minutesArrive) - (hoursDepart * 60 + minutesDepart)
 
 /**
  * Простая
@@ -118,7 +118,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
 fun accountInThreeYears(initial: Int, percent: Int): Double =
-        (1 + percent).pow(n = 3) * initial
+        (1 + percent / 100.00).pow(n = 3) * initial
 
 /**1
  * Простая
