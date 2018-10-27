@@ -4,6 +4,7 @@ package lesson3.task1
 
 import lesson1.task1.lengthInMeters
 import lesson1.task1.sqr
+import java.lang.Math.pow
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -142,7 +143,7 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
 fun isCoPrime(m: Int, n: Int): Boolean {
     if (m == 1 || n == 1) return true
     if (m % n == 0 || n % m == 0) return false
-    for (i in 2..sqrt(minOf(m, n).toDouble()).toInt()){
+    for (i in 2..sqrt(minOf(m, n).toDouble()).toInt()) {
         if (n % i == 0 && m % i == 0) return false
     }
     return true
@@ -268,7 +269,18 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int = funcrion(n, ::sqr)
+
+fun funcrion(n: Int, func: (n: Int) -> Int): Int {
+    var count = 0
+    var number = 0
+    while (count < n) {
+        number += 1
+        val event = digitNumber(func(number))
+        count += event
+    }
+    return (func(number) / pow(10.0, (count - n).toDouble())).toInt() % 10
+}
 /**
  * Сложная
  *
@@ -278,4 +290,4 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int = funcrion(n, ::fib)
