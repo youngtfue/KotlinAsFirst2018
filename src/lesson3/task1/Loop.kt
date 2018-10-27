@@ -2,7 +2,9 @@
 
 package lesson3.task1
 
+import lesson1.task1.lengthInMeters
 import lesson1.task1.sqr
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 /**
@@ -70,7 +72,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var count = 0
-    var number = n
+    var number = abs(n)
     if (number == 0) count = 1
     while (number > 0) {
         number /= 10
@@ -137,7 +139,14 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = lcm(m, n) == 1
+fun isCoPrime(m: Int, n: Int): Boolean {
+    if (m == 1 || n == 1) return true
+    if (m % n == 0 || n % m == 0) return false
+    for (i in 2..sqrt(minOf(m, n).toDouble()).toInt()){
+        if (n % i == 0 && m % i == 0) return false
+    }
+    return true
+}
 
 /**
  * Простая
@@ -258,8 +267,8 @@ fun hasDifferentDigits(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
 
+fun squareSequenceDigit(n: Int): Int = TODO()
 /**
  * Сложная
  *
