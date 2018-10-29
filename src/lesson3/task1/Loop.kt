@@ -269,9 +269,9 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 
-fun squareSequenceDigit(n: Int): Int = funcrion(n, ::sqr)
+fun squareSequenceDigit(n: Int): Int = function(n, ::sqr)
 
-fun funcrion(n: Int, func: (n: Int) -> Int): Int {
+fun function(n: Int, func: (n: Int) -> Int): Int {
     var count = 0
     var number = 0
     while (count < n) {
@@ -290,4 +290,4 @@ fun funcrion(n: Int, func: (n: Int) -> Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = funcrion(n, ::fib)
+fun fibSequenceDigit(n: Int): Int = function(n, ::fib)
