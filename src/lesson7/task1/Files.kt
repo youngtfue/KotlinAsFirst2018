@@ -56,7 +56,6 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> =
         substrings.map { it to File(inputName).readText().split(it, ignoreCase = true).size - 1 }.toMap()
 
-
 /**
  * Средняя
  *
