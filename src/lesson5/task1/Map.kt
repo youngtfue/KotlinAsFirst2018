@@ -2,7 +2,6 @@
 
 package lesson5.task1
 
-import lesson4.task1.abs
 import kotlin.math.abs
 
 /**
@@ -119,10 +118,8 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  */
 fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
     val mutableMap = mutableMapOf<Int, MutableList<String>>()
-    val result = mutableMapOf<Int, List<String>>()
     grades.forEach { mutableMap.getOrPut(it.value, ::mutableListOf).add(it.key) }
-    for ((key, value) in mutableMap) result[key] = value.toList()
-    return result
+    return mutableMap.toList().sortedBy { it.first }.toMap()
 }
 
 /**
@@ -231,8 +228,12 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = b.toSet().int
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean =
-        word.toLowerCase().toSet().all { it -> it in chars.map { it.toLowerCase() }.toSet() }
+fun canBuildFrom(chars: List<Char>, word: String): Boolean {
+    val wordWithoutDuplicate = word.toLowerCase().toHashSet()
+
+    return chars.containsAll(wordWithoutDuplicate)
+}
+
 
 /**
  * Средняя
@@ -246,7 +247,7 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean =
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = list.groupingBy { it }.eachCount().filter { it.value > 1 }
+fun extractRepeats(list: List<String>): Map<String, Int> = list.groupingBy { it }.eachCount().filterValues { it > 1 }
 
 /**
  * Средняя
@@ -258,12 +259,8 @@ fun extractRepeats(list: List<String>): Map<String, Int> = list.groupingBy { it 
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
 fun hasAnagrams(words: List<String>): Boolean {
-    val mutwords: MutableMap<List<Char>, String> = mutableMapOf()
-    for (i in words) {
-        if (i.toList().sorted() in mutwords) return true
-        else mutwords += i.toList().sorted() to i
-    }
-    return false
+    val words1 = words.map { it.toList().sorted() }.toSet()
+    return words1.size != words.size
 }
 
 /**
